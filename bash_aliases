@@ -5,3 +5,7 @@ alias pull='git pull'
 alias push='git push'
 alias deletebranches='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
 alias branches='git branch --list'
+
+if [ -f ~/.bash_aliases.local ]; then
+. ~/.bash_aliases.local
+fi
