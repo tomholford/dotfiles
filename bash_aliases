@@ -4,7 +4,7 @@ alias gst='git status'
 alias pull='git pull'
 alias push='git push'
 alias cleanmerged='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
-alias cleansquashed='~./cleansquashed'
+alias cleansquashed='~/cleansquashed'
 alias branches='git branch --list'
 
 alias atom='atom-beta'
