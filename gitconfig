@@ -11,6 +11,7 @@
     st = status
     ci = commit
     br = branch
+    bs = branch-select
     co = checkout
     df = diff
     ds = diff --staged
