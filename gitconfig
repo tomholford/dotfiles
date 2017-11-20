@@ -7,6 +7,9 @@
 [color]
     ui = auto
 
+[core]
+    hooksPath = ~/.git_template/hooks
+
 [alias]
     st = status
     ci = commit
