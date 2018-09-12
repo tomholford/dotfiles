@@ -22,5 +22,6 @@
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local
     ls = ls-files
+    set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
     st = status
     unstage = reset HEAD
