@@ -7,6 +7,7 @@ alias cleanmerged='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git
 alias cleansquashed='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias g='git'
 alias gco='git checkout'
+alias gcom='git checkout master'
 alias gst='git status'
 alias gx='gitx'
 alias pull='git pull && cleanbranches'
