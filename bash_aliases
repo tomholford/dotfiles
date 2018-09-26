@@ -13,6 +13,8 @@ alias gx='gitx'
 alias pull='git pull && cleanbranches'
 alias push='git push'
 alias showtags='npm dist-tag ls $1'
+alias ys='yarn start'
+alias yb='yarn build'
 
 [[ -f ~/.bash_aliases.local ]] && source ~/.bash_aliases.local
 [[ -f ~/.bash_aliases.work ]] && source ~/.bash_aliases.work
