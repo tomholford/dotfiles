@@ -8,6 +8,7 @@ alias cleansquashed='git checkout -q master && git for-each-ref refs/heads/ "--f
 alias g='git'
 alias gco='git checkout'
 alias gcom='git checkout master'
+alias gcomp='git checkout master && pull'
 alias gst='git status'
 alias gx='gitx'
 alias pull='git pull && cleanbranches'
