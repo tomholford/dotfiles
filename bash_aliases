@@ -1,3 +1,4 @@
+alias addkeys='ssh-add -A'
 alias atom='atom-beta'
 alias branches='git branch --list'
 alias cat='bat'
