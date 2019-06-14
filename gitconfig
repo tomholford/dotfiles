@@ -16,6 +16,7 @@
     bs = branch-select
     ci = commit
     co = checkout
+    cp = cherry-pick
     df = diff
     ds = diff --staged
     lg = log -p
