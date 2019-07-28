@@ -8,7 +8,7 @@
     ui = auto
 
 [core]
-    excludes = ~/.gitignore
+    excludes = ~/.gitignore_global
     hooksPath = ~/.git_template/hooks
 
 [alias]
@@ -25,7 +25,7 @@
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local
     ls = ls-files
     recent = for-each-ref --sort=-committerdate --format=\"%(HEAD) %(color:blue)%(color:bold)%(objectname:short)%(color:reset)\t%(color:green)%(color:bold)%(authordate:relative)\t%(color:magenta)%(color:bold)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes --count 10
- set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+    set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
     st = status
     unstage = reset HEAD
 
