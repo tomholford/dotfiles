@@ -1,4 +1,4 @@
-%w{awesome_print irbtools}.each do |lib| 
+%w{amazing_print irbtools}.each do |lib| 
   begin 
     require lib 
   rescue LoadError => err
