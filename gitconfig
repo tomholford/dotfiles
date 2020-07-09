@@ -8,7 +8,7 @@
     ui = auto
 
 [core]
-    excludes = ~/.gitignore_global
+    excludesFile = ~/.gitignore_global
     hooksPath = ~/.git_template/hooks
 
 [alias]
