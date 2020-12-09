@@ -1,4 +1,4 @@
-require 'awesome_print'
+require 'amazing_print'
 
 # == Pry-Nav - Using pry as a debugger ==
 Pry.commands.alias_command 'c', 'continue' rescue nil
