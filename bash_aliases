@@ -1,5 +1,6 @@
 alias addkeys='ssh-add -A'
 alias atom='atom-beta'
+alias be='bundle exec'
 alias branches='git branch --list'
 alias cat='bat'
 alias d='docker'

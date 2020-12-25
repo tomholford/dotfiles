@@ -37,6 +37,7 @@ brew install deno
 brew install ffmpeg
 brew install gh
 brew install git
+brew install go
 brew install htop
 brew install httpie
 brew install jq
@@ -64,7 +65,9 @@ brew install --cask iterm2
 brew install --cask little-snitch
 brew install --cask micro-snitch
 brew install --cask mysides
+brew install --cask obs
 brew install --cask openvpn-connect
+brew install --cask platypus
 brew install --cask signal
 brew install --cask spectacle
 brew install --cask transmission
