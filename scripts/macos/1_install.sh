@@ -60,6 +60,7 @@ brew install --cask coconutbattery
 brew install --cask cyberduck
 brew install --cask discord
 brew install --cask docker
+brew install --cask finicky
 brew install --cask gimp
 brew install --cask iterm2
 brew install --cask little-snitch
