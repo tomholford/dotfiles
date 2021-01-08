@@ -29,6 +29,9 @@ brew update
 echo "Upgrading Homebrew..."
 brew upgrade
 
+echo "Adding taps ..."
+brew tap homebrew/cask-drivers
+
 echo "Installing tools..."
 brew install bash-completion
 brew install bat
@@ -69,6 +72,7 @@ brew install --cask mysides
 brew install --cask obs
 brew install --cask openvpn-connect
 brew install --cask platypus
+brew install --cask qmk-toolbox
 brew install --cask signal
 brew install --cask spectacle
 brew install --cask transmission
