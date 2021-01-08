@@ -59,6 +59,7 @@ brew install watch
 brew install wget
 brew install youtube-dl
 brew install --cask charles
+brew install --cask chromium
 brew install --cask coconutbattery
 brew install --cask cyberduck
 brew install --cask discord
