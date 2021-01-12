@@ -67,6 +67,7 @@ brew install --cask docker
 brew install --cask finicky
 brew install --cask gimp
 brew install --cask iterm2
+brew install --cask licecap
 brew install --cask little-snitch
 brew install --cask micro-snitch
 brew install --cask mysides
