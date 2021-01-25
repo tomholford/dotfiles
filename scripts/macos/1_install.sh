@@ -97,9 +97,9 @@ mysides add Documents file:///Users/tt/Documents
 mysides add Downloads file:///Users/tt/Downloads
 mysides add Pictures file:///Users/tt/Pictures
 
-echo "Installing bash-it..."
-git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
-./.bash_it/install.sh
+# TODO: prefer oh-my-zsh
+echo "Installing oh-my-zsh..."
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo "Installing node..."
 nvm install node
