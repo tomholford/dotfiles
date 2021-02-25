@@ -44,6 +44,7 @@ brew install go
 brew install htop
 brew install httpie
 brew install jq
+brew install libpq
 brew install mysql
 brew install neofetch
 brew install nmap
@@ -53,6 +54,7 @@ brew install prettyping
 brew install rbenv
 brew install rcm
 brew install readline
+brew install rename
 brew install trash
 brew install tree
 brew install watch
