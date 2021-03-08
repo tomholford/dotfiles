@@ -60,6 +60,7 @@ brew install tree
 brew install watch
 brew install wget
 brew install youtube-dl
+brew install --cask anki
 brew install --cask charles
 brew install --cask chromium
 brew install --cask coconutbattery
@@ -68,6 +69,7 @@ brew install --cask discord
 brew install --cask docker
 brew install --cask finicky
 brew install --cask gimp
+brew install --cask gswitch
 brew install --cask iterm2
 brew install --cask licecap
 brew install --cask little-snitch
