@@ -4,6 +4,9 @@
 [push]
     default = current
 
+[pull]
+    rebase = true
+
 [color]
     ui = auto
 
@@ -29,4 +32,3 @@
     st = status
     sync-fork = !git fetch upstream && git checkout master && git merge upstream/master
     unstage = reset HEAD
-
