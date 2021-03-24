@@ -67,7 +67,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
 # Add deno executables to path for MacOS
-export PATH="/Users/tt/.deno/bin:$PATH"
+export PATH="$HOME/.deno/bin:$PATH"
 
 # Add pwd bin and home dir to PATH
 export PATH=~/bin:$PATH
