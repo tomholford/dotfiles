@@ -55,18 +55,22 @@ brew install rbenv
 brew install rcm
 brew install readline
 brew install rename
+brew install rust
 brew install trash
 brew install tree
 brew install watch
 brew install wget
 brew install youtube-dl
 brew install --cask anki
+brew install --cask bitwarden
+brew install --cask calibre
 brew install --cask charles
-brew install --cask chromium
 brew install --cask coconutbattery
 brew install --cask cyberduck
 brew install --cask discord
 brew install --cask docker
+brew install --cask electrum
+brew install --cask exodus
 brew install --cask finicky
 brew install --cask gimp
 brew install --cask gswitch
@@ -79,6 +83,7 @@ brew install --cask obs
 brew install --cask openvpn-connect
 brew install --cask platypus
 brew install --cask qmk-toolbox
+brew install --cask raspberry-pi-imager
 brew install --cask signal
 brew install --cask spectacle
 brew install --cask transmission
@@ -86,7 +91,9 @@ brew install --cask telegram
 brew install --cask tunnelblick
 brew install --cask visual-studio-code
 brew install --cask vlc
+brew install --cask vnc-viewer
 brew install --cask --appdir="/Applications" brave-browser
+brew install --cask --appdir="/Applications" chromium
 brew install --cask --appdir="/Applications" firefox
 
 echo "Running brew cleanup..."
