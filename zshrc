@@ -49,6 +49,7 @@ ZSH_THEME="mira"
 plugins=(
   nvm
   rbenv
+  ssh-agent
   zsh-autosuggestions
 )
 
