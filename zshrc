@@ -58,6 +58,10 @@ plugins=(
 ### Autoload when a .nvmrc is detected
 NVM_AUTOLOAD=1
 
+## ssh-agent
+### Enable agent-forwarding
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+
 ## oh-my-zsh
 ### Suppress insecure completion-dependent directories
 ZSH_DISABLE_COMPFIX=true
