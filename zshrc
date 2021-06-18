@@ -60,6 +60,9 @@ plugins=(
 ### Autoload when a .nvmrc is detected
 NVM_AUTOLOAD=1
 
+# ZSH extensions
+autoload zmv
+
 ## ssh-agent
 ### Enable agent-forwarding
 zstyle :omz:plugins:ssh-agent agent-forwarding on
