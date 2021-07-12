@@ -28,6 +28,7 @@ alias gcomp='git checkout master && pull'
 alias glog='git log'
 alias gst='git status'
 alias gx='gitx'
+alias listeners='lsof -nP -iTCP -sTCP:LISTEN'
 alias pop='git stash pop'
 alias pull='git pull && cleanbranches'
 alias push='git push'
@@ -38,6 +39,9 @@ alias upgrades='apt list --upgradable'
 alias unexif='mogrify -strip'
 alias ys='yarn start'
 alias yb='yarn build'
+function zup() {
+    curl -F"file=@$1" http://0x0.st
+}
 
 [[ -f ~/.zsh_aliases.local ]] && source ~/.zsh_aliases.local
 [[ -f ~/.zsh_aliases.work ]] && source ~/.zsh_aliases.work
