@@ -43,6 +43,7 @@ brew install git
 brew install go
 brew install htop
 brew install httpie
+brew install hugo
 brew install jq
 brew install libpq
 brew install mysql

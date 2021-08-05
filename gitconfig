@@ -5,7 +5,7 @@
     default = current
 
 [pull]
-    rebase = true
+    rebase = false
 
 [color]
     ui = auto
@@ -31,4 +31,10 @@
     set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
     st = status
     sync-fork = !git fetch upstream && git checkout master && git merge upstream/master
+    undo = reset --hard HEAD~1
     unstage = reset HEAD
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
