@@ -84,3 +84,4 @@ export PATH=~/bin:$PATH
 export PATH=./bin:$PATH
 
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

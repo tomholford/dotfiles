@@ -37,6 +37,7 @@ brew install bash-completion
 brew install bat
 brew install coreutils
 brew install deno
+brew install exiftool
 brew install ffmpeg
 brew install gh
 brew install git
@@ -51,6 +52,7 @@ brew install neofetch
 brew install nmap
 brew install nvm
 brew install postgresql
+brew install pngquant
 brew install prettyping
 brew install rbenv
 brew install rcm
@@ -59,6 +61,7 @@ brew install rename
 brew install rust
 brew install trash
 brew install tree
+brew install vegeta
 brew install watch
 brew install wget
 brew install youtube-dl
@@ -79,6 +82,7 @@ brew install --cask iterm2
 brew install --cask licecap
 brew install --cask little-snitch
 brew install --cask micro-snitch
+brew install --cask mullvadvpn
 brew install --cask mysides
 brew install --cask obs
 brew install --cask openvpn-connect
