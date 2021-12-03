@@ -1,5 +1,5 @@
 alias -s {css,js,jsx,ts,tsx,html,rb,erb,md,sass,scss}=code
-
+alias bat='batcat'
 alias addkeys='ssh-add -A'
 alias atom='atom-beta'
 alias be='bundle exec'
@@ -30,6 +30,7 @@ alias glag='git log --oneline --graph'
 alias glog='git log'
 alias gst='git status'
 alias gx='gitx'
+alias install='sudo apt install $1'
 alias listeners='lsof -nP -iTCP -sTCP:LISTEN'
 alias ping='prettyping --nolegend'
 alias pop='git stash pop'
