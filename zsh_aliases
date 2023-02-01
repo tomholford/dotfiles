@@ -1,5 +1,4 @@
 alias -s {css,js,jsx,ts,tsx,html,rb,erb,md,sass,scss}=code
-alias bat='batcat'
 alias addkeys='ssh-add -A'
 alias atom='atom-beta'
 alias be='bundle exec'
