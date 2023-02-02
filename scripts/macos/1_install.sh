@@ -121,5 +121,8 @@ echo "Installing node..."
 nvm install node
 npm install -g yarn firebase-tools parcel-bundler git-branch-select
 
+echo "Linking git lfs..."
+ln -s "$(which git-lfs)" "$(git --exec-path)/git-lfs"
+
 echo "Done! Now create an SSH key and clone repos"
 echo "newkey script, ssh-add, find repos script"
