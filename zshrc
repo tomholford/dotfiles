@@ -105,3 +105,5 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 [[ -s "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 eval "$(direnv hook zsh)"
+
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"

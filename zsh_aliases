@@ -3,7 +3,11 @@ alias addkeys='ssh-add -A'
 alias atom='atom-beta'
 alias be='bundle exec'
 alias branches='git branch --list'
-alias cat='bat'
+if [[ $OSTYPE == 'darwin'* ]]; then
+  alias cat='bat'
+else
+  alias cat='batcat'
+fi
 alias c='clear'
 alias c.='code .'
 alias cleanbranches='cleanmerged'
