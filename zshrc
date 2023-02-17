@@ -83,6 +83,9 @@ export PATH=$HOME/.deno/bin:$PATH
 export PATH=~/bin:$PATH
 export PATH=./bin:$PATH
 
+# Add postgresql to path if available
+[[ -d /usr/lib/postgresql/14/bin ]] && export PATH="/usr/lib/postgresql/14/bin:$PATH"
+
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 [[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
