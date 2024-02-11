@@ -47,6 +47,7 @@ ZSH_THEME="mira"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  # asdf
   deno
   gh
   nvm
@@ -90,6 +91,7 @@ export PATH=./bin:$PATH
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 [[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
 
+# Platform-agnostic nvm init
 export NVM_DIR="$HOME/.nvm"
 if [[ $OSTYPE == 'darwin'* ]]; then
   [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
@@ -103,10 +105,17 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 fi
 
+# Add yarn and globally installed modules to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
+# Init cargo
 [[ -s "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
+# Init direnv
 eval "$(direnv hook zsh)"
 
+# Init ghcup
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+
+# TODO: fix the asdf installation
+# source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
