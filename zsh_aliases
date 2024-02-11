@@ -22,6 +22,7 @@ alias dcewbe='docker-compose exec web bundle exec'
 alias dcef='docker-compose exec frontend'
 alias dcefbe='docker-compose exec frontend bundle exec'
 alias dev='cd ~/dev'
+alias dps='docker ps'
 alias fj='pbpaste | jq | pbcopy'
 alias g='git'
 alias gco='git checkout'
@@ -54,6 +55,8 @@ alias unexif='mogrify -strip'
 alias ys='yarn start'
 alias yb='yarn build'
 alias yd='youtube-dl'
+alias z='zed'
+alias z.='zed .'
 function zup() {
     curl -F"file=@$1" http://0x0.st
 }

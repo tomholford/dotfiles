@@ -105,8 +105,8 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 fi
 
-# Add yarn and globally installed modules to path
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+[[ -d $HOME/go/bin ]] && export PATH="$HOME/go/bin:$PATH"
 
 # Init cargo
 [[ -s "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
@@ -119,3 +119,7 @@ eval "$(direnv hook zsh)"
 
 # TODO: fix the asdf installation
 # source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
