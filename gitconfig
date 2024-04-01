@@ -44,3 +44,10 @@
 [diff "lockb"]
 	textconv = bun
 	binary = true
+
+[rerere]
+    enabled = true
+
+[rebase]
+    autosquash = true
+    autoStash = true
