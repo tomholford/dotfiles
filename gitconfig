@@ -33,7 +33,7 @@
     set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
     st = status
     sync-fork = !git fetch upstream && git checkout master && git merge upstream/master
-    undo = reset --hard HEAD~1
+    undo = reset HEAD~
     unstage = reset HEAD
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
@@ -51,3 +51,9 @@
 [rebase]
     autosquash = true
     autoStash = true
+[init]
+	defaultBranch = master
+[user]
+	name = tomholford
+[diff]
+	tool = vimdiff
