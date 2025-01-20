@@ -126,4 +126,6 @@ fi
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
 # Java
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+if [[ $OSTYPE == 'darwin'* ]]; then
+  export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+fi
