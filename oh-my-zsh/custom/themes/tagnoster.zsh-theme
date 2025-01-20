@@ -22,24 +22,11 @@
 # jobs are running in this shell will all be displayed automatically when
 # appropriate.
 
-### Segments of the prompt, default order declaration
-
-typeset -aHg AGNOSTER_PROMPT_SEGMENTS=(
-    prompt_status
-    prompt_context
-    prompt_virtualenv
-    prompt_dir
-    prompt_git
-    prompt_end
-)
-
 ### Segment drawing
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
 CURRENT_BG='NONE'
-if [[ -z "$PRIMARY_FG" ]]; then
-	PRIMARY_FG=black
-fi
+PRIMARY_FG=black
 
 # Characters
 SEGMENT_SEPARATOR="\ue0b0"
@@ -110,13 +97,13 @@ prompt_git() {
       ref="$DETACHED ${ref/.../}"
     fi
     prompt_segment $color $PRIMARY_FG
-    print -n " $ref"
+    print -Pn " $ref"
   fi
 }
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment gray $PRIMARY_FG ' %~ '
+  prompt_segment cyan $PRIMARY_FG ' %~ '
 }
 
 # Status:
@@ -133,22 +120,15 @@ prompt_status() {
   [[ -n "$symbols" ]] && prompt_segment $PRIMARY_FG default " $symbols "
 }
 
-# Display current virtual environment
-prompt_virtualenv() {
-  if [[ -n $VIRTUAL_ENV ]]; then
-    color=cyan
-    prompt_segment $color $PRIMARY_FG
-    print -Pn " $(basename $VIRTUAL_ENV) "
-  fi
-}
-
 ## Main prompt
 prompt_agnoster_main() {
   RETVAL=$?
   CURRENT_BG='NONE'
-  for prompt_segment in "${AGNOSTER_PROMPT_SEGMENTS[@]}"; do
-    [[ -n $prompt_segment ]] && $prompt_segment
-  done
+  prompt_status
+  prompt_context
+  prompt_dir
+  prompt_git
+  prompt_end
 }
 
 prompt_agnoster_precmd() {
