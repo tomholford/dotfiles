@@ -54,7 +54,7 @@ alias upgrades='apt list --upgradable'
 alias unexif='mogrify -strip'
 alias ys='yarn start'
 alias yb='yarn build'
-alias yd='youtube-dl'
+alias yd='yt-dlp'
 alias z='zed'
 alias z.='zed .'
 function zup() {

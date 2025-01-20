@@ -14,7 +14,7 @@ export ZSH=$HOME/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="mira"
+ZSH_THEME="tagnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -47,7 +47,6 @@ ZSH_THEME="mira"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  # asdf
   deno
   gh
   nvm
@@ -112,7 +111,9 @@ export PATH="$HOME/.cargo/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_mod
 [[ -s "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 # Init direnv
-eval "$(direnv hook zsh)"
+if command -v direnv &> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
 
 # Init ghcup
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
@@ -123,3 +124,6 @@ eval "$(direnv hook zsh)"
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+# Java
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
