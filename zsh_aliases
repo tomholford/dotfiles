@@ -10,6 +10,7 @@ else
 fi
 alias c='clear'
 alias c.='code .'
+alias claude="$HOME/.claude/local/claude"
 alias cleanbranches='cleanmerged'
 # alias cleanbranches='cleanmerged && cleansquashed'
 alias cleanmerged='git branch --merged | egrep -v "(^\*|master|develop|main)" | xargs git branch -d'
@@ -41,6 +42,7 @@ alias gx='gitx'
 alias install='sudo apt install $1'
 alias listeners='lsof -nP -iTCP -sTCP:LISTEN'
 alias nrd='npm run dev'
+alias pdc='pwd | pbcopy'
 alias ping='prettyping --nolegend'
 alias pop='git stash pop'
 alias pull='git pull && cleanbranches'
@@ -58,7 +60,7 @@ alias yd='yt-dlp'
 alias z='zed'
 alias z.='zed .'
 function zup() {
-    curl -F"file=@$1" http://0x0.st
+    curl -v --user-agent "zuploader/0.1" -F"file=@$1" http://0x0.st
 }
 
 [[ -f ~/.zsh_aliases.local ]] && source ~/.zsh_aliases.local

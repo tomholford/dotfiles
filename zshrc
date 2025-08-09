@@ -129,3 +129,11 @@ fi
 if [[ $OSTYPE == 'darwin'* ]]; then
   export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 fi
+
+# bun
+export PATH="$HOME/.bun/bin:$PATH"
+
+# if zshrc.local exists, source it
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi
