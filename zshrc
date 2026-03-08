@@ -88,7 +88,6 @@ export PATH=./bin:$PATH
 
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-[[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
 
 # Platform-agnostic nvm init
 export NVM_DIR="$HOME/.nvm"
@@ -130,10 +129,18 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 fi
 
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
 # bun
-export PATH="$HOME/.bun/bin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Auto-attach tmux on mosh login (not plain SSH)
+if [[ -z "$TMUX" ]] && [[ "$(ps -o comm= -p $PPID 2>/dev/null)" == "mosh-server" ]]; then
+    tmux attach -t main 2>/dev/null || tmux new -s main
+fi
 
 # if zshrc.local exists, source it
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
-fi
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
