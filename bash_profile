@@ -149,3 +149,9 @@ if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile
 -e 
 if [ -e /home/tt/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tt/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 . "$HOME/.cargo/env"
+
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+# LM Studio (if installed)
+[[ -d "$HOME/.lmstudio/bin" ]] && export PATH="$PATH:$HOME/.lmstudio/bin"
+

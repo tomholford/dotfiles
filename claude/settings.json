@@ -1,8 +1,19 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true"
+  },
   "includeCoAuthoredBy": false,
+  "statusLine": {
+    "type": "command",
+    "command": "bash -c 'node \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | head -1)dist/index.js\"'"
+  },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true,
+    "claude-hud@claude-hud": true,
+    "clangd-lsp@claude-plugins-official": true
+  },
   "feedbackSurveyState": {
     "lastShownTime": 1754070524712
-  },
-  "model": "sonnet"
+  }
 }

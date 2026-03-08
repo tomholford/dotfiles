@@ -1,146 +1,144 @@
+# Performance optimizations for Oh-My-Zsh
+DISABLE_MAGIC_FUNCTIONS="true"
+ZSH_DISABLE_COMPFIX=true
+
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
     *) return;;
 esac
 
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Smart completion caching - only rebuild once per day
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qNmh+24) ]]; then
+  compinit -d "${ZDOTDIR:-$HOME}/.zcompdump"
+else
+  compinit -C -d "${ZDOTDIR:-$HOME}/.zcompdump"
+fi
 
-# Path to your oh-my-zsh installation.
+# Path to your oh-my-zsh installation
 export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# Theme
 ZSH_THEME="tagnoster"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "nebirhos" "mira" )
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# Minimal plugin set - remove slow plugins
 plugins=(
-  deno
+  git
   gh
-  nvm
-  rbenv
   ssh-agent
   zsh-autosuggestions
 )
 
-# Plugin Config
-## nvm
-### Autoload when a .nvmrc is detected
-zstyle ':omz:plugins:nvm' autoload yes
-
-# ZSH extensions
-autoload zmv
-
-## ssh-agent
-### Enable agent-forwarding
+# SSH agent configuration
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
-## oh-my-zsh
-### Suppress insecure completion-dependent directories
-ZSH_DISABLE_COMPFIX=true
-
+# Load Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
 
-# Set default editor
+# Essential environment variables
 export EDITOR='vim'
+export CLAUDE_CODE_DISABLE_AUTO_MEMORY=0
 
-# Add deno executables to path
-export PATH=$HOME/.deno/bin:$PATH
+# Consolidated PATH setup
+export PATH="$HOME/bin:/usr/local/bin:$HOME/.deno/bin:$HOME/.local/bin:./bin:./scripts:$PATH"
 
-# Add pwd bin and home dir to PATH
-export PATH=~/bin:$PATH
-export PATH=./bin:$PATH
-
-# Add postgresql to path if available
+# PostgreSQL path (if available)
 [[ -d /usr/lib/postgresql/14/bin ]] && export PATH="/usr/lib/postgresql/14/bin:$PATH"
 
-[[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
-# Platform-agnostic nvm init
-export NVM_DIR="$HOME/.nvm"
-if [[ $OSTYPE == 'darwin'* ]]; then
-  [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
-  [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-else
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
-
-if [[ $OSTYPE == 'darwin'* ]]; then
-  source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-fi
-
-export PATH="$HOME/.cargo/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-[[ -d $HOME/go/bin ]] && export PATH="$HOME/go/bin:$PATH"
-
-# Init cargo
-[[ -s "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
-
-# Init direnv
-if command -v direnv &> /dev/null; then
-  eval "$(direnv hook zsh)"
-fi
-
-# Init ghcup
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
-
-# TODO: fix the asdf installation
-# source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-
-# Java
+# macOS specific paths
 if [[ $OSTYPE == 'darwin'* ]]; then
   export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 fi
 
+# Lazy-load development tools - these will only initialize when first used
+lazy_load_cargo() {
+  unfunction lazy_load_cargo cargo 2>/dev/null
+  [[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+  export PATH="$HOME/.cargo/bin:$PATH"
+  if [[ $# -gt 0 ]]; then
+    command "$@"
+  fi
+}
+
+lazy_load_ghcup() {
+  unfunction lazy_load_ghcup ghcup 2>/dev/null
+  [[ -f "$HOME/.ghcup/env" ]] && source "$HOME/.ghcup/env"
+  if [[ $# -gt 0 ]]; then
+    command "$@"
+  fi
+}
+
+lazy_load_direnv() {
+  unfunction lazy_load_direnv
+  if command -v direnv &> /dev/null; then
+    eval "$(direnv hook zsh)"
+  fi
+}
+
+lazy_load_gcloud() {
+  unfunction lazy_load_gcloud gcloud gsutil 2>/dev/null
+  if [[ $OSTYPE == 'darwin'* && -f "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc" ]]; then
+    source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+  fi
+  if [[ $# -gt 0 ]]; then
+    command "$@"
+  fi
+}
+
+# Create wrapper functions for lazy loading
+cargo() { lazy_load_cargo cargo "$@"; }
+ghcup() { lazy_load_ghcup ghcup "$@"; }
+gcloud() { lazy_load_gcloud gcloud "$@"; }
+gsutil() { lazy_load_gcloud gsutil "$@"; }
+
+# Auto-load direnv on directory change
+autoload -U add-zsh-hook
+add-zsh-hook chpwd lazy_load_direnv
+
+# Fast Node.js manager (defensive — skips if not installed)
+command -v fnm &>/dev/null && eval "$(fnm env --use-on-cd --shell zsh)"
+
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# bun
+# Additional PATH entries
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$BUN_INSTALL/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+[[ -d $HOME/go/bin ]] && export PATH="$HOME/go/bin:$PATH"
+
+# LM Studio (if installed)
+[[ -d "$HOME/.lmstudio/bin" ]] && export PATH="$PATH:$HOME/.lmstudio/bin"
+
+# ZSH extensions
+autoload zmv
+
+# Load aliases if available
+[[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
+
+# Load Nix profile if available
+[[ -e ~/.nix-profile/etc/profile.d/nix.sh ]] && source ~/.nix-profile/etc/profile.d/nix.sh
+
+# Load GVM if available (lazy)
+lazy_load_gvm() {
+  unfunction lazy_load_gvm gvm 2>/dev/null
+  [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+  if [[ $# -gt 0 ]]; then
+    command "$@"
+  fi
+}
+gvm() { lazy_load_gvm gvm "$@"; }
+
+# Load tabtab completions
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && source ~/.config/tabtab/zsh/__tabtab.zsh
 
 # Auto-attach tmux on mosh login (not plain SSH)
 if [[ -z "$TMUX" ]] && [[ "$(ps -o comm= -p $PPID 2>/dev/null)" == "mosh-server" ]]; then
     tmux attach -t main 2>/dev/null || tmux new -s main
 fi
 
-# if zshrc.local exists, source it
+# Load env file if available (uv/rustup)
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+# Load local config if available
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

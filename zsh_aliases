@@ -2,6 +2,7 @@ alias -s {css,js,jsx,ts,tsx,html,rb,erb,md,sass,scss}=code
 alias addkeys='ssh-add -A'
 alias atom='atom-beta'
 alias be='bundle exec'
+alias blaude="bun run --bun claude"
 alias branches='git branch --list'
 if [[ $OSTYPE == 'darwin'* ]]; then
   alias cat='bat'
@@ -10,11 +11,17 @@ else
 fi
 alias c='clear'
 alias c.='code .'
-alias claude="$HOME/.claude/local/claude"
-alias cleanbranches='cleanmerged'
-# alias cleanbranches='cleanmerged && cleansquashed'
-alias cleanmerged='git branch --merged | egrep -v "(^\*|master|develop|main)" | xargs git branch -d'
-alias cleansquashed='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias cl='claude'
+function _git_default_branch() {
+  git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "main"
+}
+function _git_worktree_branches() {
+  git worktree list --porcelain 2>/dev/null | grep '^branch ' | sed 's@^branch refs/heads/@@'
+}
+alias cleanmerged='git branch --merged origin/$(_git_default_branch) | grep -Ev "^\s*(\*|master|develop|main|prod)" | grep -Fxv "$(_git_worktree_branches)" | xargs -n 1 git branch -d'
+alias cleangone='git fetch --prune && git branch -vv | grep "\[gone\]" | grep -Ev "^\s*\*" | awk "{print \$1}" | grep -Fxv "$(_git_worktree_branches)" | xargs -n 1 git branch -D'
+alias cleansquashed='_default=$(_git_default_branch) && _wt=$(_git_worktree_branches) && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do echo "$_wt" | grep -Fxq "$branch" && continue; mergeBase=$(git merge-base origin/$_default $branch) && [[ $(git cherry origin/$_default $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias cleanbranches='cleanmerged && cleangone && cleansquashed'
 alias d='docker'
 alias dc='docker-compose'
 alias dce='docker-compose exec'
@@ -45,7 +52,7 @@ alias nrd='npm run dev'
 alias pdc='pwd | pbcopy'
 alias ping='prettyping --nolegend'
 alias pop='git stash pop'
-alias pull='git pull && cleanbranches'
+alias pull='git pull --prune && cleanbranches'
 alias push='git push'
 alias remotes='git remote -v'
 alias rmexif='exiftool -all= $1'
