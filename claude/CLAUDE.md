@@ -187,3 +187,4 @@ On this machine you have:
 
 - when doing web development, chromium + websocat + chrome devtools protocol (cdp) can be used together as a tool that can interact with the site in a browser
 - when a bug is reported, don't start by trying to fix it — first write a failing test that reproduces the bug, then use subagents to fix it and prove the fix with the passing test
+- when iterating on a plan, use AskUserQuestion to refine the plan with user input before proceeding
