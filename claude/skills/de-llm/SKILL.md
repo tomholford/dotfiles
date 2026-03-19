@@ -2,7 +2,6 @@
 name: de-llm
 description: Post-process text to remove LLM-generated writing patterns and make it sound more natural/human-written
 argument-hint: [file-path or paste text]
-disable-model-invocation: true
 ---
 
 # De-LLM: Remove AI Writing Tells

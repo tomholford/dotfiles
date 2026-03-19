@@ -2,7 +2,6 @@
 name: gist
 description: Publish the previous output or analysis as a secret GitHub gist
 argument-hint: "[filename] [description]"
-disable-model-invocation: true
 allowed-tools: Bash(gh gist *), Write
 ---
 

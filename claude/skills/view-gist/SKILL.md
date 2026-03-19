@@ -2,7 +2,6 @@
 name: view-gist
 description: View a GitHub gist by ID or URL
 argument-hint: "<gist-id or url>"
-disable-model-invocation: true
 allowed-tools: Bash(gh gist *)
 ---
 

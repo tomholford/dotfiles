@@ -1,16 +1,22 @@
 ---
 name: draft-pr
 description: Stage, commit, push, and open a draft PR
-disable-model-invocation: true
-allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git push:*), Bash(git diff:*), Bash(git branch:*), Bash(git log:*), Bash(gh pr create:*)
+allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git push:*), Bash(git diff:*), Bash(git branch:*), Bash(git log:*), Bash(gh pr create:*), mcp__gitea__pull_request_write
 ---
 
 ## Context
 
+- Git remotes: !`git remote -v`
 - Current git status: !`git status`
 - Current git diff (staged and unstaged): !`git diff HEAD`
 - Current branch: !`git branch --show-current`
 - Recent commits (for message style): !`git log --oneline -5`
+
+## Platform detection
+
+Check the git remotes above to determine the platform:
+- If remote URLs contain `github.com` → use `gh` CLI
+- Otherwise (Gitea, Forgejo, etc.) → use `mcp__gitea__pull_request_write` with method `create`
 
 ## Your task
 
@@ -26,10 +32,12 @@ Based on the changes above:
 
 3. **Push**: Push to remote. If no upstream is set, use `git push -u origin <branch>`.
 
-4. **Create draft PR**: Use `gh pr create --draft` with:
+4. **Create draft PR**:
+   - **GitHub**: Use `gh pr create --draft`
+   - **Gitea**: Use `mcp__gitea__pull_request_write` with method `create`, setting the owner/repo from the remote URL and head/base branches accordingly
    - A descriptive title
    - Reference any Linear (e.g., ENG-123) or Sentry issues mentioned in the code, commits, or branch name
-   - Use a HEREDOC for the body
+   - Use a HEREDOC for the body (GitHub) or pass body directly (Gitea)
    - Body structure:
 
      Summary (prose): What the PR does.  This should also include a description of the motivation: what the problem was previously, and what effects it had.  If the motivation is obvious (e.g., "implements the new feature"), it can be left out.

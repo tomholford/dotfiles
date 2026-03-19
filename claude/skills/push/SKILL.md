@@ -1,7 +1,6 @@
 ---
 name: push
 description: Stage, commit, and push changes
-disable-model-invocation: true
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git push:*), Bash(git diff:*), Bash(git branch:*), Bash(git log:*)
 ---
 
