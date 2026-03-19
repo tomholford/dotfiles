@@ -2,8 +2,13 @@
 name: rebase
 description: Rebase current branch onto a target branch (default master), resolve merge conflicts, and summarize resolutions
 argument-hint: "[target-branch]"
-disable-model-invocation: true
 ---
+
+## Context
+
+- Current branch: !`git branch --show-current`
+- Working tree status: !`git status`
+- Recent commits on current branch: !`git log --oneline -10`
 
 # Rebase and Resolve
 
