@@ -13,7 +13,6 @@ $nodejs\
 $python\
 $rust\
 $golang\
-$docker_context\
 $cmd_duration\
 $line_break\
 $character"""
@@ -96,15 +95,6 @@ style = "bold red"
 [golang]
 format = "via [ $version]($style) "
 style = "bold cyan"
-
-# -- Docker context --
-[docker_context]
-symbol = " "
-format = "via [$symbol$context]($style) "
-style = "bold blue"
-only_with_files = true
-detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
-detect_folders = []
 
 # -- Tokyo Night palette --
 [palettes.tokyo_night]
