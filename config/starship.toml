@@ -1,25 +1,109 @@
-# Starship prompt config — minimal starting point
-# See: https://starship.rs/config/
+# Starship prompt — hybrid minimal + Tokyo Night
+# https://starship.rs/config/
+
+palette = 'tokyo_night'
 
 format = """
-$username\
+$os\
 $hostname\
 $directory\
 $git_branch\
 $git_status\
+$nodejs\
+$python\
+$rust\
+$golang\
 $cmd_duration\
 $line_break\
 $character"""
 
+add_newline = true
+
+# -- Prompt character --
 [character]
-success_symbol = "[❯](bold green)"
+success_symbol = "[❯](bold cyan)"
 error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
 
+# -- OS icon --
+[os]
+disabled = false
+style = "fg_dark"
+
+[os.symbols]
+Macos = " "
+Linux = " "
+Raspbian = " "
+Debian = " "
+Ubuntu = " "
+
+# -- Hostname (SSH only) --
+[hostname]
+ssh_only = true
+format = "[@$hostname](bold magenta) "
+ssh_symbol = ""
+
+# -- Directory --
 [directory]
-truncation_length = 3
+truncation_length = 5
+fish_style_pwd_dir_length = 1
+style = "bold blue"
+repo_root_style = "bold blue"
 
+# -- Git --
 [git_branch]
-format = "[$branch]($style) "
+symbol = " "
+format = "on [$symbol$branch(:$remote_branch)]($style) "
+style = "bold magenta"
 
 [git_status]
-format = '([\[$all_status$ahead_behind\]]($style) )'
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold red"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?"
+stashed = "≡"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+# -- Command duration --
+[cmd_duration]
+format = "took [$duration]($style) "
+style = "bold yellow"
+min_time = 2_000
+
+# -- Language versions (auto-detected per project) --
+[nodejs]
+format = "via [ $version](bold green) "
+detect_files = ["package.json", ".node-version"]
+detect_folders = ["node_modules"]
+detect_extensions = []
+
+[python]
+format = 'via [ $version( \($virtualenv\))]($style) '
+style = "bold yellow"
+detect_extensions = []
+
+[rust]
+format = "via [ $version]($style) "
+style = "bold red"
+
+[golang]
+format = "via [ $version]($style) "
+style = "bold cyan"
+
+# -- Tokyo Night palette --
+[palettes.tokyo_night]
+fg = '#a9b1d6'
+fg_dark = '#565f89'
+blue = '#7aa2f7'
+cyan = '#7dcfff'
+green = '#9ece6a'
+magenta = '#bb9af7'
+red = '#f7768e'
+yellow = '#e0af68'
+orange = '#ff9e64'
