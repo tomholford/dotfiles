@@ -4,6 +4,21 @@ case $- in
     *) return;;
 esac
 
+# Essential environment variables
+export EDITOR='vim'
+export CLAUDE_CODE_DISABLE_AUTO_MEMORY=0
+
+# Consolidated PATH setup (before plugin/prompt init so tools are discoverable)
+export PATH="$HOME/bin:/usr/local/bin:$HOME/.deno/bin:$HOME/.local/bin:./bin:./scripts:$PATH"
+
+# PostgreSQL path (if available)
+[[ -d /usr/lib/postgresql/14/bin ]] && export PATH="/usr/lib/postgresql/14/bin:$PATH"
+
+# macOS specific paths
+if [[ $OSTYPE == 'darwin'* ]]; then
+  export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+fi
+
 # SSH agent configuration (consumed by OMZ ssh-agent plugin via antidote)
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
@@ -17,21 +32,6 @@ antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 
 # Starship prompt
 eval "$(starship init zsh)"
-
-# Essential environment variables
-export EDITOR='vim'
-export CLAUDE_CODE_DISABLE_AUTO_MEMORY=0
-
-# Consolidated PATH setup
-export PATH="$HOME/bin:/usr/local/bin:$HOME/.deno/bin:$HOME/.local/bin:./bin:./scripts:$PATH"
-
-# PostgreSQL path (if available)
-[[ -d /usr/lib/postgresql/14/bin ]] && export PATH="/usr/lib/postgresql/14/bin:$PATH"
-
-# macOS specific paths
-if [[ $OSTYPE == 'darwin'* ]]; then
-  export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-fi
 
 # Lazy-load development tools - these will only initialize when first used
 lazy_load_cargo() {
