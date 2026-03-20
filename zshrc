@@ -1,40 +1,22 @@
-# Performance optimizations for Oh-My-Zsh
-DISABLE_MAGIC_FUNCTIONS="true"
-ZSH_DISABLE_COMPFIX=true
-
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
     *) return;;
 esac
 
-# Smart completion caching - only rebuild once per day
-autoload -Uz compinit
-if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qNmh+24) ]]; then
-  compinit -d "${ZDOTDIR:-$HOME}/.zcompdump"
-else
-  compinit -C -d "${ZDOTDIR:-$HOME}/.zcompdump"
-fi
-
-# Path to your oh-my-zsh installation
-export ZSH=$HOME/.oh-my-zsh
-
-# Theme
-ZSH_THEME="tagnoster"
-
-# Minimal plugin set - remove slow plugins
-plugins=(
-  git
-  gh
-  ssh-agent
-  zsh-autosuggestions
-)
-
-# SSH agent configuration
+# SSH agent configuration (consumed by OMZ ssh-agent plugin via antidote)
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
-# Load Oh-My-Zsh
-source $ZSH/oh-my-zsh.sh
+# Antidote plugin manager (brew on macOS, git clone on Linux)
+if [[ -f "$(brew --prefix 2>/dev/null)/opt/antidote/share/antidote/antidote.zsh" ]]; then
+  source "$(brew --prefix)/opt/antidote/share/antidote/antidote.zsh"
+elif [[ -f "${ZDOTDIR:-$HOME}/.antidote/antidote.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.antidote/antidote.zsh"
+fi
+antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
+
+# Starship prompt
+eval "$(starship init zsh)"
 
 # Essential environment variables
 export EDITOR='vim'
