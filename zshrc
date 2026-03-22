@@ -121,8 +121,6 @@ if [[ -z "$TMUX" ]] && [[ "$(ps -o comm= -p $PPID 2>/dev/null)" == "mosh-server"
 
     if [[ $_count -eq 0 ]]; then
         tmux new -s 0
-    elif [[ $_count -eq 1 ]]; then
-        tmux attach -t "$(echo "$_sessions" | cut -d: -f1)"
     else
         echo "tmux sessions:"
         echo "$_sessions" | nl -w1 -s') '
