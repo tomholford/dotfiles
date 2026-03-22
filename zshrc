@@ -116,7 +116,26 @@ gvm() { lazy_load_gvm gvm "$@"; }
 
 # Auto-attach tmux on mosh login (not plain SSH)
 if [[ -z "$TMUX" ]] && [[ "$(ps -o comm= -p $PPID 2>/dev/null)" == "mosh-server" ]]; then
-    tmux attach -t main 2>/dev/null || tmux new -s main
+    _sessions=$(tmux list-sessions 2>/dev/null)
+    _count=$(echo "$_sessions" | grep -c . 2>/dev/null)
+
+    if [[ $_count -eq 0 ]]; then
+        tmux new -s 0
+    elif [[ $_count -eq 1 ]]; then
+        tmux attach -t "$(echo "$_sessions" | cut -d: -f1)"
+    else
+        echo "tmux sessions:"
+        echo "$_sessions" | nl -w1 -s') '
+        echo -n "# (or n=new): "
+        read _choice
+        if [[ "$_choice" == "n" ]]; then
+            tmux new
+        else
+            _target=$(echo "$_sessions" | sed -n "${_choice}p" | cut -d: -f1)
+            [[ -n "$_target" ]] && tmux attach -t "$_target" || tmux new
+        fi
+    fi
+    unset _sessions _count _choice _target
 fi
 
 # Load env file if available (uv/rustup)
