@@ -136,6 +136,9 @@ if [[ -z "$TMUX" ]] && [[ "$(ps -o comm= -p $PPID 2>/dev/null)" == "mosh-server"
     unset _sessions _count _choice _target
 fi
 
+# Kill mosh-server after 7 days with no client connection
+export MOSH_SERVER_SIGNAL_TMOUT=604800
+
 # Load env file if available (uv/rustup)
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
