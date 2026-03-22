@@ -20,8 +20,8 @@ function _git_default_branch() {
 function _git_worktree_branches() {
   git worktree list --porcelain 2>/dev/null | grep '^branch ' | sed 's@^branch refs/heads/@@'
 }
-alias cleanmerged='git branch --merged origin/$(_git_default_branch) | grep -Ev "^\s*(\*|master|develop|main|prod)" | grep -Fxv "$(_git_worktree_branches)" | xargs -n 1 git branch -d'
-alias cleangone='git fetch --prune && git branch -vv | grep "\[gone\]" | grep -Ev "^\s*\*" | awk "{print \$1}" | grep -Fxv "$(_git_worktree_branches)" | xargs -n 1 git branch -D'
+alias cleanmerged='git branch --merged origin/$(_git_default_branch) | grep -Ev "^\s*(\*|master|develop|main|prod)" | grep -Fxv "$(_git_worktree_branches)" | xargs -r -n 1 git branch -d'
+alias cleangone='git fetch --prune && git branch -vv | grep "\[gone\]" | grep -Ev "^\s*\*" | awk "{print \$1}" | grep -Fxv "$(_git_worktree_branches)" | xargs -r -n 1 git branch -D'
 alias cleansquashed='_default=$(_git_default_branch) && _wt=$(_git_worktree_branches) && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do echo "$_wt" | grep -Fxq "$branch" && continue; mergeBase=$(git merge-base origin/$_default $branch) && [[ $(git cherry origin/$_default $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias cleanbranches='cleanmerged && cleangone && cleansquashed'
 alias d='docker'
