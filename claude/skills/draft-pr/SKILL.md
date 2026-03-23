@@ -44,7 +44,7 @@ Based on the changes above:
 
      Changes (bullets): list of significant changes.  Use sub-bullets to reference parts of the motivation, if applicable.  Use sub-bullets to break down changes with substantial complexity, if applicable.  Reference file paths, endpoints, types, and fields as needed, using `code spans`.
 
-     Validation (prose or bullets, as applicable): Anything the author did, beyond the standard running the tests and linter.  If there is nothing, this section can be left out.
+     Validation (prose or bullets, as applicable): Anything the author did, beyond the standard running the tests and linter.  "Tests pass" and "linter is clean" are baseline requirements for every PR — never list them as validation steps.  Only include genuinely notable validation (e.g., manual testing of a specific scenario, load testing, testing against a staging environment).  If you can't think of anything beyond the basics, write `TODO: validate` as a reminder for the author.
 
      Post-Merge (bullets): checklist of action items needed after merge. If there are no post-merge steps, this section can be left out.
 
