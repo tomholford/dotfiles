@@ -1,20 +1,32 @@
 ---
 name: prd-to-issues
 description: Break a PRD into independently-grabbable GitHub issues using tracer-bullet vertical slices. Use when user wants to convert a PRD to issues, create implementation tickets, or break down a PRD into work items.
-allowed-tools: Bash(gh *), Bash(git *), Read, Grep, Glob, Agent
+allowed-tools: Bash(gh *), Bash(git *), Read, Grep, Glob, Agent, mcp__gitea__issue_read, mcp__gitea__issue_write, mcp__gitea__list_issues
 ---
 
 # PRD to Issues
 
-Break a PRD into independently-grabbable GitHub issues using vertical slices (tracer bullets).
+Break a PRD into independently-grabbable issues using vertical slices (tracer bullets).
+
+## Context
+
+- Git remotes: !`git remote -v`
+
+## Platform Detection
+
+Check the git remotes above to determine the platform:
+- If remote URLs contain `github.com` → use `gh` CLI
+- Otherwise (Gitea, Forgejo, etc.) → use Gitea MCP tools
 
 ## Process
 
 ### 1. Locate the PRD
 
-Ask the user for the PRD GitHub issue number (or URL).
+Ask the user for the PRD issue number (or URL).
 
-If the PRD is not already in your context window, fetch it with `gh issue view <number>` (with comments).
+If the PRD is not already in your context window:
+- **GitHub**: `gh issue view <number>` (with comments)
+- **Gitea**: `mcp__gitea__issue_read` with method `get`
 
 ### 2. Explore the codebase (optional)
 
@@ -50,11 +62,14 @@ Ask the user:
 
 Iterate until the user approves the breakdown.
 
-### 5. Create the GitHub issues
-
-For each approved slice, create a GitHub issue using `gh issue create`. Use the issue body template below.
+### 5. Create the issues
 
 Create issues in dependency order (blockers first) so you can reference real issue numbers in the "Blocked by" field.
+
+- **GitHub**: `gh issue create`
+- **Gitea**: `mcp__gitea__issue_write` with method `create`
+
+Use the issue body template below.
 
 <issue-template>
 ## Parent PRD

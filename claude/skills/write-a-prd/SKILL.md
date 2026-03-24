@@ -1,12 +1,22 @@
 ---
 name: write-a-prd
 description: Create a PRD through user interview, codebase exploration, and module design, then submit as a GitHub issue. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.
-allowed-tools: Bash(gh *), Bash(git *), Read, Grep, Glob, Agent
+allowed-tools: Bash(gh *), Bash(git *), Read, Grep, Glob, Agent, mcp__gitea__issue_write
 ---
 
 # Write a PRD
 
-Create a PRD through user interview, codebase exploration, and module design, then submit as a GitHub issue. You may skip steps if not necessary.
+Create a PRD through user interview, codebase exploration, and module design, then submit as an issue. You may skip steps if not necessary.
+
+## Context
+
+- Git remotes: !`git remote -v`
+
+## Platform Detection
+
+Check the git remotes above to determine the platform:
+- If remote URLs contain `github.com` → use `gh` CLI
+- Otherwise (Gitea, Forgejo, etc.) → use Gitea MCP tools
 
 ## Process
 
@@ -32,7 +42,9 @@ Check with the user that these modules match their expectations. Check which mod
 
 ### 5. Write the PRD
 
-Once you have a complete understanding, use the template below to write the PRD. Submit as a GitHub issue using `gh issue create`.
+Once you have a complete understanding, use the template below to write the PRD. Submit as an issue:
+- **GitHub**: `gh issue create`
+- **Gitea**: `mcp__gitea__issue_write` with method `create`
 
 <prd-template>
 
