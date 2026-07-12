@@ -19,3 +19,10 @@ sudo usermod -aG docker pi
 sudo vim /etc/ssh/sshd_config
 
 
+
+# Grok Build CLI privacy defaults (disable whole-repo trace upload)
+if [[ -x "$(dirname "$0")/../install-grok-privacy.sh" ]]; then
+  "$(dirname "$0")/../install-grok-privacy.sh"
+elif [[ -x "$HOME/dev/dotfiles/scripts/install-grok-privacy.sh" ]]; then
+  "$HOME/dev/dotfiles/scripts/install-grok-privacy.sh"
+fi

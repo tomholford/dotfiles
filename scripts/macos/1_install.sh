@@ -126,3 +126,8 @@ ln -s "$(which git-lfs)" "$(git --exec-path)/git-lfs"
 
 echo "Done! Now create an SSH key and clone repos"
 echo "newkey script, ssh-add, find repos script"
+
+# Grok Build CLI privacy defaults (disable whole-repo trace upload)
+if [[ -x "$(dirname "$0")/../install-grok-privacy.sh" ]]; then
+  "$(dirname "$0")/../install-grok-privacy.sh"
+fi

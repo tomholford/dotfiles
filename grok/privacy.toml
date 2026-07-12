@@ -1,0 +1,18 @@
+# Grok Build CLI privacy defaults
+# Linked by rcm as ~/.grok/privacy.toml (fragment; not the full config).
+# Apply with:  ~/dev/dotfiles/scripts/install-grok-privacy.sh
+#   or:        scripts/install-grok-privacy.sh  (from a clone)
+#
+# Stops whole-repo / session-trace upload (Channel B) + product telemetry.
+# Verified via MITM on grok 0.2.98. Does NOT stop model-turn code the agent opens.
+# Env equivalents: GROK_TELEMETRY_ENABLED=0 GROK_TELEMETRY_TRACE_UPLOAD=0
+
+[features]
+telemetry = false
+
+[telemetry]
+trace_upload = false
+mixpanel_enabled = false
+
+[harness]
+disable_codebase_upload = true
