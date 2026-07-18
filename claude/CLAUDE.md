@@ -6,7 +6,7 @@ This is the root Claude Code config
 
 - When installing packages on macOS, prefer `brew`
 - Prefer `bun` to `npm` for JavaScript/TypeScript projects
-- `zsh` with `oh-my-zsh` is the default shell
+- `zsh` with `antidote` plugin manager is the default shell
 - Always use `master` as the default branch when creating git repos
 - Prefer `jq` over `python3` for JSON processing on the command line
 
