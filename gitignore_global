@@ -8,3 +8,5 @@ ehthumbs.db
 Thumbs.db
 .idea*
 node_modules
+
+**/.claude/settings.local.json

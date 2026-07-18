@@ -5,7 +5,16 @@
       "Bash(git add:*)",
       "Bash(git push:*)",
       "Bash(git checkout:*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(for skill:*)",
+      "Bash(do echo:*)",
+      "Read(//Users/tt/.claude/skills/**)",
+      "Bash(done)",
+      "Bash(do mkdir:*)",
+      "Bash(cp ~/.claude/skills/$skill/SKILL.md ~/dev/dotfiles/claude/skills/$skill/SKILL.md)",
+      "Bash(gh api:*)",
+      "Skill(draft-pr)",
+      "Bash(git commit:*)"
     ]
   }
 }

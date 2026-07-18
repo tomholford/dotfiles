@@ -144,3 +144,7 @@ export MOSH_SERVER_SIGNAL_TMOUT=604800
 
 # Load local config if available
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+# <<< grok installer <<<
